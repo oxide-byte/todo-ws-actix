@@ -1,0 +1,48 @@
+## See: http-client.env.json
+##< {%
+##    request.variables.set("token", "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJKQVpubzZxOThSczBYQ1ptN3hmQ1NtQURGaGJrTDRVNk94REw3MTl1NFhnIn0.eyJleHAiOjE2OTEyMTc4NzUsImlhdCI6MTY5MTIxNzU3NSwianRpIjoiMmNiMWUxNjctYjBiMC00MTExLWJiZTMtNjEzOWU2OWFlMjU0IiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMTo4ODg4L3JlYWxtcy9sZWFybi1ydXN0LXJlYWxtIiwic3ViIjoic3R1ZGVudCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImxlYXJuLXJ1c3QtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6IjFiZjVlNWIwLWVkMDctNDc0YS04NzBjLWE4MjdhNDdiZGE5MiIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiMWJmNWU1YjAtZWQwNy00NzRhLTg3MGMtYTgyN2E0N2JkYTkyIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInByZWZlcnJlZF91c2VybmFtZSI6InN0dWRlbnQiLCJlbWFpbCI6InN0dWRlbnRAc3R1ZGVudC5jb20ifQ.lBjiqH9aQU6g6QpTsU56xctOgVSHuQ-wJH87HqLPA81kyZMe5KgCIoOM4LwBFkJF8JdHb6jOPppnY2aEGII07qbxhCoPelvMXIScoZdi67gU7ZGVLj9pIp3an9bVoUxFaOqKG21DXbCF70himFBV3N0tcOXkdPhsJtEn1cWPuSvCfKqCtiJrkgaJXm26OJbwPr8m__xAyAJJrvCBD45a0tr5dWjKN3MtjJ_0QFsfuBaMb5E60lheN2VlcN8qya3OOat8bR1NnQJoKxgBCxzzmMBmFHMw_cIkok8s3c1aChNzwj-2LgYtYW80SyLJNyFeTkSlMLjE2_rcfBKNXfU2sw")
+##%}
+
+### Get all Todo's
+GET http://127.0.0.1:8080/api/todo
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Get Todo by ID
+GET http://127.0.0.1:8080/api/todo/1
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Get Todo's with params (Page)
+GET http://127.0.0.1:8080/api/todo/params?page=1&limit=10
+Authorization: Bearer {{token}}
+
+### Add new Post
+POST http://127.0.0.1:8080/api/todo
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "owner": "ME",
+  "name": "ME",
+  "description": "Learn Rust",
+  "status": "OPEN"
+}
+
+### Updata existing Post
+PUT http://127.0.0.1:8080/api/todo
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "id": 1,
+  "owner": "ME2",
+  "name": "ME2",
+  "description": "Learn more Rust",
+  "status": "PROGRESS"
+}
+
+### Delete Post
+DELETE http://127.0.0.1:8080/api/todo/2
+Authorization: Bearer {{token}}
+Accept: application/json

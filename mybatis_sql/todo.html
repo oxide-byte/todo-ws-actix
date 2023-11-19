@@ -1,0 +1,12 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+        "https://raw.githubusercontent.com/rbatis/rbatis/master/rbatis-codegen/mybatis-3-mapper.dtd">
+<mapper>
+    <select id="select_page_data">
+        <if test="do_count == true">
+            select count(1) from todo
+        </if>
+        <if test="do_count == false">
+            select * FROM todo LIMIT ${page_size} OFFSET ${page_no}
+        </if>
+    </select>
+</mapper>

@@ -1,0 +1,21 @@
+### REALM Description
+
+http://127.0.0.1:8888/realms/learn-rust-realm/.well-known/openid-configuration
+
+### GET PUBLIC KEYS
+
+GET http://127.0.0.1:8888/realms/learn-rust-realm/
+
+### GET CERTIFICAT
+
+GET http://127.0.0.1:8888/realms/learn-rust-realm/protocol/openid-connect/certs
+
+### CONNECT Student
+### https://jwt.io/
+
+POST http://127.0.0.1:8888/realms/learn-rust-realm/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id=learn-rust-client&username=student&password=password&grant_type=password
+
+###

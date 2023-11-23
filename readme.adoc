@@ -1,0 +1,77 @@
+= TODO - WEBSERVICE - ACTIX
+
+== Introduction
+
+This is a simple Todo Rest service.
+
+The application contains the basic CRUD elements, and write in a Postgres database provided in a Docker container. For the SQL instructions the POC uses an Rust implementation off MyBatis (Experimental). The Rest entry points are secured with KeyCloak and exchanges a JWT Token.
+
+== Running
+
+Starting the Docker Compose file that includes a Postgres Database with 2 Schema's:
+
+* Schema Todo (Application)
+
+* Schema KeyCloak (KeyCloak Application)
+
+[source,bash]
+----
+docker compose start
+----
+
+compile the application:
+
+[source,bash]
+----
+cargo build
+----
+
+run the application:
+
+[source,bash]
+----
+cargo run
+----
+
+== Testing
+
+For testing you can use Postman or like I prefer from IntelliJ the http files, see folder http. Some samples:
+
+Retrieving an JWT Token
+
+[source,httprequest]
+----
+POST http://127.0.0.1:8888/realms/learn-rust-realm/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id=learn-rust-client&username=student&password=password&grant_type=password
+----
+
+Retrieving the list of Todo's
+
+[source,httprequest]
+----
+GET http://127.0.0.1:8080/api/todo
+Authorization: Bearer {{token}}
+Accept: application/json
+----
+
+Adding a Todo
+
+[source,httprequest]
+----
+POST http://127.0.0.1:8080/api/todo
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "owner": "ME",
+  "name": "ME",
+  "description": "Learn Rust",
+  "status": "OPEN"
+}
+----
+
+== Next Steps
+
+Feel free to explore the different options of the Actix Framework. An alternative implementation follows in my next exploration.

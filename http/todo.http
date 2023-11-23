@@ -29,7 +29,7 @@ Content-Type: application/json
   "status": "OPEN"
 }
 
-### Updata existing Post
+### Update existing Post
 PUT http://127.0.0.1:8080/api/todo
 Authorization: Bearer {{token}}
 Content-Type: application/json
@@ -43,6 +43,6 @@ Content-Type: application/json
 }
 
 ### Delete Post
-DELETE http://127.0.0.1:8080/api/todo/2
+DELETE http://127.0.0.1:8080/api/todo/1
 Authorization: Bearer {{token}}
 Accept: application/json

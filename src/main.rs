@@ -1,11 +1,14 @@
 use actix_cors::Cors;
 use actix_web::{App, http::header, HttpServer};
 use actix_web::middleware::Logger;
+use awc::Client;
+use crate::key::KeyCloakKey;
 
 mod health_check;
 mod todo;
 mod routes;
 pub mod context;
+mod key;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -14,6 +17,16 @@ async fn main() -> std::io::Result<()> {
     if std::env::var_os("RUST_LOG").is_none() {
         std::env::set_var("RUST_LOG", "actix_web=info");
     }
+
+    let client = Client::new();
+
+    let response = client
+        .get("http://127.0.0.1:8888/realms/learn-rust-realm/")    // <- Create request builder
+        .insert_header(("User-Agent", "Actix-web"))
+        .send()                             // <- Send http request
+        .await;
+
+    let key_cloak = response.unwrap().json::<KeyCloakKey>().await.unwrap();
 
     println!("🚀 Server started successfully: http://127.0.0.1:8080");
 
@@ -29,7 +42,8 @@ async fn main() -> std::io::Result<()> {
             .supports_credentials();
 
         App::new()
-            .configure(routes::routes)
+
+            .configure(|conf| routes::routes(conf, key_cloak.public_key.clone()))
             .wrap(cors)
             .wrap(Logger::default())
     })

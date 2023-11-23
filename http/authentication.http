@@ -19,3 +19,16 @@ Content-Type: application/x-www-form-urlencoded
 client_id=learn-rust-client&username=student&password=password&grant_type=password
 
 ###
+### GENERATE NEW KEY AND ADD TO ENVIRONNMENT
+###
+
+POST http://127.0.0.1:8888/realms/learn-rust-realm/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id=learn-rust-client&username=student&password=password&grant_type=password
+
+> {%
+    client.global.set("token", response.body.access_token);
+    client.log(client.global.get("token"))
+%}
+###

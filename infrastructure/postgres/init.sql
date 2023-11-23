@@ -18,8 +18,8 @@ create table if not exists todo.todo
     name        varchar not null,
     description varchar not null,
     status      varchar not null,
-    created     timestamp with time zone,
-    modified    timestamp with time zone,
+    created     timestamp,
+    modified    timestamp,
     PRIMARY KEY (id)
 );
 
